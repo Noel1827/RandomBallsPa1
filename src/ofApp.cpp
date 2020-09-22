@@ -1,4 +1,5 @@
 #include "ofApp.h"
+#include "Particle.h"
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -62,6 +63,7 @@ void ofApp::draw(){
 			ofDrawCircle(attractPointsWithMovement[i], 4);
 		}
 	}
+	
 
 	ofSetColor(230);	
 	ofDrawBitmapString(currentModeStr + "\n\nSpacebar to reset. \nKeys 1-4 to change mode.", 10, 20);
@@ -89,6 +91,12 @@ void ofApp::keyPressed(int key){
 		
 	if( key == ' ' ){
 		resetParticles();
+	}
+
+	if(key == 'a'){
+	 currentMode = Particle_Mode_Pause;
+	 currentModeStr = "Toggle Particles in the air";
+	 resetParticles();
 	}
 }
 

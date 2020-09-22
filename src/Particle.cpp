@@ -1,5 +1,6 @@
 #include "Particle.h"
 
+
 //------------------------------------------------------------------
 Particle::Particle(){
 	attractPoints = NULL;
@@ -38,6 +39,11 @@ void Particle::reset(){
 	}else{
 		drag  = ofRandom(0.95, 0.998);	
 	}
+	 if(mode == Particle_Mode_Pause){
+	 	vel.x=0;
+ 	    vel.y=0;
+		vel.z = 0;
+	 }
 }
 
 void Particle::attractToPoint(int x, int y ){
@@ -47,6 +53,11 @@ void Particle::attractToPoint(int x, int y ){
 		
 		vel *= drag; //apply drag
 		vel += frc * 0.6; //apply force
+		if(mode == Particle_Mode_Pause){
+		vel.x=0;
+		vel.y=0;
+		vel.z = 0;
+	}
 }
 
 void Particle::repelFromPoint(int x, int y){
@@ -167,6 +178,7 @@ void Particle::draw(){
 	int r = ofRandom(0,255);
 	int g = ofRandom(0,255);
 	int b = ofRandom(0,255);
+	
 
 	if( mode == PARTICLE_MODE_ATTRACT ){
 		ofSetColor(r, g, b);
@@ -179,6 +191,9 @@ void Particle::draw(){
 	}
 	else if( mode == PARTICLE_MODE_NEAREST_POINTS ){
 		ofSetColor(r, g, b);
+	}
+	else if(mode == Particle_Mode_Pause){
+		ofSetColor(r,g,b);
 	}
 			
 	ofDrawCircle(pos.x, pos.y, scale * 4.0);
