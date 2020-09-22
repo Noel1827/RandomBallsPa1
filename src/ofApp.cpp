@@ -63,10 +63,12 @@ void ofApp::draw(){
 			ofDrawCircle(attractPointsWithMovement[i], 4);
 		}
 	}
-	
 
 	ofSetColor(230);	
 	ofDrawBitmapString(currentModeStr + "\n\nSpacebar to reset. \nKeys 1-4 to change mode.", 10, 20);
+	if(currentMode == Particle_Mode_DoubleSize){
+		ofDrawCircle(40,40,50);
+	}
 }
 
 //--------------------------------------------------------------
@@ -98,7 +100,13 @@ void ofApp::keyPressed(int key){
 	 currentModeStr = "Toggle Particles in the air";
 	 resetParticles();
 	}
+
+	if(key == 'D'){
+		currentMode = Particle_Mode_DoubleSize;
+		doublesize();
+	}
 }
+	
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){

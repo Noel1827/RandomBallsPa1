@@ -195,7 +195,10 @@ void Particle::draw(){
 	else if(mode == Particle_Mode_Pause){
 		ofSetColor(r,g,b);
 	}
+	if(mode == Particle_Mode_DoubleSize){
+ofDrawCircle(pos.x, pos.y, scale * 10 * 2 );
+	} else
 			
-	ofDrawCircle(pos.x, pos.y, scale * 4.0);
+	ofDrawCircle(pos.x, pos.y, scale * 4);
 }
 
