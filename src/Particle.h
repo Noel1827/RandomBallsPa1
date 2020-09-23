@@ -16,7 +16,9 @@ class Particle{
 	public:
 		Particle();
 		
-		void setMode(particleMode newMode);	
+		void setMode(particleMode newMode);
+		void toggleParticles();
+		void doublesize();	
 		void setAttractPoints( vector <glm::vec3> * attract );
 		void attractToPoint(int, int);
 		void repelFromPoint(int, int);
@@ -28,6 +30,7 @@ class Particle{
 		glm::vec3 vel;
 		glm::vec3 frc;
 		
+		bool updating;
 		float drag; 
 		float uniqueVal;
 		float scale;
