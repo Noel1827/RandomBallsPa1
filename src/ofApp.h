@@ -25,6 +25,7 @@ class ofApp : public ofBaseApp{
 		
 		particleMode currentMode;
 		string currentModeStr; 
+	
 
 		vector <Particle> p;
 		vector <glm::vec3> attractPoints;
