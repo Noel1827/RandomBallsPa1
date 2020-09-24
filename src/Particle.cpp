@@ -14,9 +14,13 @@ void Particle::setMode(particleMode newMode)
 // -----------------------------------------------------------------
 void Particle::doublesize()
 {
-	this->scale = this->scale * 2;
+	scale *= 2;
 }
-
+//------------------------------------------------------------------
+void Particle::halvesize()
+{
+	scale /= 2;
+}
 void Particle::toggleParticles()
 {
 	updating = false;
@@ -219,10 +223,6 @@ void Particle::draw()
 		ofSetColor(r, g, b);
 	}
 	else if (mode == PARTICLE_MODE_NEAREST_POINTS)
-	{
-		ofSetColor(r, g, b);
-	}
-	else if (mode == Particle_Mode_Pause)
 	{
 		ofSetColor(r, g, b);
 	}

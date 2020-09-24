@@ -6,9 +6,7 @@ enum particleMode{
 	PARTICLE_MODE_REPEL,
 	PARTICLE_MODE_NEAREST_POINTS,
 	PARTICLE_MODE_NOISE,
-	PauseParticles,
-	Particle_Mode_Pause,
-	Particle_Mode_DoubleSize,
+	
 };
 
 class Particle{
@@ -19,6 +17,7 @@ class Particle{
 		void setMode(particleMode newMode);
 		void toggleParticles();
 		void doublesize();	
+		void halvesize();
 		void setAttractPoints( vector <glm::vec3> * attract );
 		void attractToPoint(int, int);
 		void repelFromPoint(int, int);

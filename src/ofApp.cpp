@@ -124,10 +124,17 @@ void ofApp::keyPressed(int key)
 	if (key == 'd')
 	{
 		// currentMode = Particle_Mode_DoubleSize;
-		currentModeStr = "Double sized Particles";
+		currentModeStr = "Double size Particles";
 		for (unsigned int i = 0; i < p.size(); i++)
 		{
 			p[i].doublesize();
+		}
+	}
+	if(key == 'm'){
+		currentModeStr = "Halve size of Particles";
+		for (unsigned int i = 0; i < p.size(); i++)
+		{
+			p[i].halvesize();
 		}
 	}
 }
