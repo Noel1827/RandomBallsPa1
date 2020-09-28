@@ -71,7 +71,9 @@ void ofApp::draw(){
 void ofApp::keyPressed(int key){
 	if( key == '1'){
 		currentMode = PARTICLE_MODE_ATTRACT;
-		currentModeStr = "1 - PARTICLE_MODE_ATTRACT: attracts to mouse"; 		
+		currentModeStr = "1 - PARTICLE_MODE_ATTRACT: attracts to mouse"; 
+		
+				
 	}
 	if( key == '2'){
 		currentMode = PARTICLE_MODE_REPEL;
