@@ -6,6 +6,7 @@ void ofApp::setup()
 {
 
 	updating = true;
+	recordbaby = false;
 
 	ofSetVerticalSync(true);
 
@@ -63,10 +64,10 @@ void ofApp::update()
 	if (replaybaby)
 	{
 		count++;
-		if (count == 120 && RecordKey < record.size())
+		if (count == 120 && RecordKey <= record.size())
 		{
 			count = 0;
-			Donottouch(record[RecordKey]);
+			keyPressed(record[RecordKey]);
 			RecordKey++;
 		}
 	}
@@ -75,7 +76,7 @@ void ofApp::update()
 //--------------------------------------------------------------
 void ofApp::draw()
 {
-	ofBackgroundGradient(ofColor(255, 0, 0), ofColor(10, 10, 10));
+	ofBackgroundGradient(ofColor(0, 0, 255), ofColor(10, 10, 10));
 
 	for (unsigned int i = 0; i < p.size(); i++)
 	{
@@ -101,7 +102,16 @@ void ofApp::draw()
 	}
 	else if (recordbaby)
 	{
+		ofSetColor(255, 0, 0);
+		ofDrawCircle(ofGetWidth() - 35, 35, 30);
+		ofDrawBitmapString(currentModeStr + "\n\nSpacebar to reset. \nKeys 1-4 to change mode.", 10, 20);
+	}
+
+	if (replaybaby)
+	{
+
 		ofSetColor(0, 255, 0);
+		ofDrawTriangle(ofGetWidth() - (40 + 70), 50, ofGetWidth() - (40 + 70), 10, ofGetWidth() - 70, 30);
 		ofDrawBitmapString(currentModeStr + "\n\nSpacebar to reset. \nKeys 1-4 to change mode.", 10, 20);
 	}
 }
@@ -177,106 +187,28 @@ void ofApp::keyPressed(int key)
 	}
 	if (key == 'r' || key == 'R')
 	{
-		currentModeStr = "Recording baby";
+		currentModeStr = "We are Recording babyyyyyyyyyyyyyyyyy";
 		recordbaby = !recordbaby;
 	}
 
 	if (key == 'p' || key == 'P')
 	{
-		currentModeStr = "Replaying babyyyyyyy";
-		replaybaby = !replaybaby;
+		currentModeStr = "Replaying babyyyyyyyyyyyyyyyyyyy";
+		replaybaby = true;
 	}
 
 	if (recordbaby)
 	{
-		record.push_back(key); // up
-	}
-}
-// ------------------------------------------------------------
-void ofApp::Donottouch(int key){
-	if (key == '1')
-	{
-		currentMode = PARTICLE_MODE_ATTRACT;
-		currentModeStr = "1 - PARTICLE_MODE_ATTRACT: attracts to mouse";
-	}
-	if (key == '2')
-	{
-		currentMode = PARTICLE_MODE_REPEL;
-		currentModeStr = "2 - PARTICLE_MODE_REPEL: repels from mouse";
-	}
-	if (key == '3')
-	{
-		currentMode = PARTICLE_MODE_NEAREST_POINTS;
-		currentModeStr = "3 - PARTICLE_MODE_NEAREST_POINTS: hold 'f' to disable force";
-	}
-	if (key == '4')
-	{
-		currentMode = PARTICLE_MODE_NOISE;
-		currentModeStr = "4 - PARTICLE_MODE_NOISE: snow particle simulation";
-		resetParticles();
+		record.push_back(key);
 	}
 
-	if (key == ' ')
-	{
-		resetParticles();
-	}
-
-	if (key == 'a' || key == 'A')
-	{
-		updating = !updating;
-	}
-
-	if (key == 'd' || key == 'D')
-	{
-		currentModeStr = "Double size Particles";
-		for (unsigned int i = 0; i < p.size(); i++)
-		{
-			p[i].doublesize();
-		}
-	}
-	if (key == 'm' || key == 'M')
-	{
-		currentModeStr = "Halve size of Particles";
-		for (unsigned int i = 0; i < p.size(); i++)
-		{
-			p[i].halvesize();
-		}
-	}
-
-	if (key == 't' || key == 'T')
-	{
-		currentModeStr = "double the velocity";
-		for (unsigned int i = 0; i < p.size(); i++)
-		{
-			p[i].doubleVelocity();
-		}
-	}
-
-	if (key == 's' || key == 'S')
-	{
-		currentModeStr = "Halve  the velocity";
-		for (unsigned int i = 0; i < p.size(); i++)
-		{
-			p[i].halveVelocity();
-		}
-	}
-	if (key == 'r' || key == 'R')
-	{
-		currentModeStr = "Recording baby";
-		recordbaby = !recordbaby;
-	}
-
-	if (key == 'p' || key == 'P')
+	if (key == 'c' || key == 'C')
 	{
 		replaybaby = !replaybaby;
-	}
 
-	if (recordbaby)
-	{
-		record.push_back(key); // up
+		resetParticles();
 	}
 }
-
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key)
 {
