@@ -1,12 +1,13 @@
 #pragma once
 #include "ofMain.h"
 
-enum particleMode{
+enum particleMode
+{
 	PARTICLE_MODE_ATTRACT = 0,
 	PARTICLE_MODE_REPEL,
 	PARTICLE_MODE_NEAREST_POINTS,
 	PARTICLE_MODE_NOISE,
-	
+
 };
 
 class Particle{
@@ -18,6 +19,9 @@ class Particle{
 		void toggleParticles();
 		void doublesize();	
 		void halvesize();
+		void doubleVelocity();
+		void halveVelocity();
+		void record();
 		void setAttractPoints( vector <glm::vec3> * attract );
 		void attractToPoint(int, int);
 		void repelFromPoint(int, int);
@@ -29,7 +33,6 @@ class Particle{
 		glm::vec3 vel;
 		glm::vec3 frc;
 		
-		bool updating;
 		float drag; 
 		float uniqueVal;
 		float scale;

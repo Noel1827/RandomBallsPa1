@@ -4,6 +4,9 @@
 //--------------------------------------------------------------
 void ofApp::setup()
 {
+
+	updating = true;
+
 	ofSetVerticalSync(true);
 
 	int num = 1500;
@@ -40,18 +43,32 @@ void ofApp::resetParticles()
 //--------------------------------------------------------------
 void ofApp::update()
 {
-
-	for (unsigned int i = 0; i < p.size(); i++)
+	// the updating boolean decides if the particles move or not.
+	if (updating)
 	{
-		p[i].setMode(currentMode);
-		p[i].update();
+		for (unsigned int i = 0; i < p.size(); i++)
+		{
+			p[i].setMode(currentMode);
+			p[i].update();
+		}
+
+		//lets add a bit of movement to the attract points
+		for (unsigned int i = 0; i < attractPointsWithMovement.size(); i++)
+		{
+			attractPointsWithMovement[i].x = attractPoints[i].x + ofSignedNoise(i * 10, ofGetElapsedTimef() * 0.7) * 12.0;
+			attractPointsWithMovement[i].y = attractPoints[i].y + ofSignedNoise(i * -10, ofGetElapsedTimef() * 0.7) * 12.0;
+		}
 	}
 
-	//lets add a bit of movement to the attract points
-	for (unsigned int i = 0; i < attractPointsWithMovement.size(); i++)
+	if (replaybaby)
 	{
-		attractPointsWithMovement[i].x = attractPoints[i].x + ofSignedNoise(i * 10, ofGetElapsedTimef() * 0.7) * 12.0;
-		attractPointsWithMovement[i].y = attractPoints[i].y + ofSignedNoise(i * -10, ofGetElapsedTimef() * 0.7) * 12.0;
+		count++;
+		if (count == 120 && RecordKey < record.size())
+		{
+			count = 0;
+			Donottouch(record[RecordKey]);
+			RecordKey++;
+		}
 	}
 }
 
@@ -76,9 +93,17 @@ void ofApp::draw()
 			ofDrawCircle(attractPointsWithMovement[i], 4);
 		}
 	}
+	if (!recordbaby)
+	{
 
-	ofSetColor(230);
-	ofDrawBitmapString(currentModeStr + "\n\nSpacebar to reset. \nKeys 1-4 to change mode.", 10, 20);
+		ofSetColor(230);
+		ofDrawBitmapString(currentModeStr + "\n\nSpacebar to reset. \nKeys 1-4 to change mode.", 10, 20);
+	}
+	else if (recordbaby)
+	{
+		ofSetColor(0, 255, 0);
+		ofDrawBitmapString(currentModeStr + "\n\nSpacebar to reset. \nKeys 1-4 to change mode.", 10, 20);
+	}
 }
 
 //--------------------------------------------------------------
@@ -87,17 +112,7 @@ void ofApp::keyPressed(int key)
 	if (key == '1')
 	{
 		currentMode = PARTICLE_MODE_ATTRACT;
-<<<<<<< HEAD
-<<<<<<< HEAD
-		currentModeStr = "1 - PARTICLE_MODE_ATTRACT: attracts to mouse"; 
-		
-				
-=======
 		currentModeStr = "1 - PARTICLE_MODE_ATTRACT: attracts to mouse";
->>>>>>> origin/Halves-sizes-of-particles
-=======
-		currentModeStr = "1 - PARTICLE_MODE_ATTRACT: attracts to mouse";
->>>>>>> origin/Halves-sizes-of-particles
 	}
 	if (key == '2')
 	{
@@ -121,31 +136,144 @@ void ofApp::keyPressed(int key)
 		resetParticles();
 	}
 
-	if (key == 'a')
+	if (key == 'a' || key == 'A')
 	{
-		// currentMode = Particle_Mode_Pause;
-		currentModeStr = "Toggle Particles in the air";
-			for (unsigned int i = 0; i < p.size(); i++)
-		{
-			p[i].toggleParticles();
-		}
+		updating = !updating;
 	}
 
-	if (key == 'd')
+	if (key == 'd' || key == 'D')
 	{
-		// currentMode = Particle_Mode_DoubleSize;
 		currentModeStr = "Double size Particles";
 		for (unsigned int i = 0; i < p.size(); i++)
 		{
 			p[i].doublesize();
 		}
 	}
-	if(key == 'm'){
+	if (key == 'm' || key == 'M')
+	{
 		currentModeStr = "Halve size of Particles";
 		for (unsigned int i = 0; i < p.size(); i++)
 		{
 			p[i].halvesize();
 		}
+	}
+
+	if (key == 't' || key == 'T')
+	{
+		currentModeStr = "double the velocity";
+		for (unsigned int i = 0; i < p.size(); i++)
+		{
+			p[i].doubleVelocity();
+		}
+	}
+
+	if (key == 's' || key == 'S')
+	{
+		currentModeStr = "Halve  the velocity";
+		for (unsigned int i = 0; i < p.size(); i++)
+		{
+			p[i].halveVelocity();
+		}
+	}
+	if (key == 'r' || key == 'R')
+	{
+		currentModeStr = "Recording baby";
+		recordbaby = !recordbaby;
+	}
+
+	if (key == 'p' || key == 'P')
+	{
+		currentModeStr = "Replaying babyyyyyyy";
+		replaybaby = !replaybaby;
+	}
+
+	if (recordbaby)
+	{
+		record.push_back(key); // up
+	}
+}
+// ------------------------------------------------------------
+void ofApp::Donottouch(int key){
+	if (key == '1')
+	{
+		currentMode = PARTICLE_MODE_ATTRACT;
+		currentModeStr = "1 - PARTICLE_MODE_ATTRACT: attracts to mouse";
+	}
+	if (key == '2')
+	{
+		currentMode = PARTICLE_MODE_REPEL;
+		currentModeStr = "2 - PARTICLE_MODE_REPEL: repels from mouse";
+	}
+	if (key == '3')
+	{
+		currentMode = PARTICLE_MODE_NEAREST_POINTS;
+		currentModeStr = "3 - PARTICLE_MODE_NEAREST_POINTS: hold 'f' to disable force";
+	}
+	if (key == '4')
+	{
+		currentMode = PARTICLE_MODE_NOISE;
+		currentModeStr = "4 - PARTICLE_MODE_NOISE: snow particle simulation";
+		resetParticles();
+	}
+
+	if (key == ' ')
+	{
+		resetParticles();
+	}
+
+	if (key == 'a' || key == 'A')
+	{
+		updating = !updating;
+	}
+
+	if (key == 'd' || key == 'D')
+	{
+		currentModeStr = "Double size Particles";
+		for (unsigned int i = 0; i < p.size(); i++)
+		{
+			p[i].doublesize();
+		}
+	}
+	if (key == 'm' || key == 'M')
+	{
+		currentModeStr = "Halve size of Particles";
+		for (unsigned int i = 0; i < p.size(); i++)
+		{
+			p[i].halvesize();
+		}
+	}
+
+	if (key == 't' || key == 'T')
+	{
+		currentModeStr = "double the velocity";
+		for (unsigned int i = 0; i < p.size(); i++)
+		{
+			p[i].doubleVelocity();
+		}
+	}
+
+	if (key == 's' || key == 'S')
+	{
+		currentModeStr = "Halve  the velocity";
+		for (unsigned int i = 0; i < p.size(); i++)
+		{
+			p[i].halveVelocity();
+		}
+	}
+	if (key == 'r' || key == 'R')
+	{
+		currentModeStr = "Recording baby";
+		recordbaby = !recordbaby;
+	}
+
+	if (key == 'p' || key == 'P')
+	{
+		replaybaby = !replaybaby;
+	}
+
+	if (recordbaby)
+	{
+		record.push_back(key); // up
 	}
 }
 

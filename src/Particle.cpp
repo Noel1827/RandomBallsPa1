@@ -21,11 +21,27 @@ void Particle::halvesize()
 {
 	scale /= 2;
 }
+//------------------------------------------------------------------
 void Particle::toggleParticles()
 {
-	updating = false;
+
+	vel.x = 0;
+	vel.y = 0;
 }
-//------------------------------------------------------------------
+// ----------------------------------------------------------------
+void Particle::halveVelocity()
+{
+	vel.x = vel.x / 2;
+	vel.y = vel.y / 2;
+}
+// -----------------------------------------------------------------
+void Particle::doubleVelocity()
+{
+	vel.x = vel.x * 2;
+	vel.y = vel.y * 2;
+}
+// ----------------------------------------------------------------
+
 void Particle::setAttractPoints(vector<glm::vec3> *attract)
 {
 	attractPoints = attract;
@@ -172,11 +188,7 @@ void Particle::update()
 	}
 
 	// UPDATE OUR POSITION
-	if (updating == false)
-	{
-		pos += vel * 0;
-	}
-	else
+
 		pos += vel;
 
 	// LIMIT THE PARTICLES TO STAY ON SCREEN
