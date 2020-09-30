@@ -64,12 +64,13 @@ void ofApp::update()
 	if (replaybaby)
 	{
 		count++;
-		if (count == 120 && RecordKey <= record.size())
+		if (count == 100 && RecordKey < record.size())
 		{
 			count = 0;
 			keyPressed(record[RecordKey]);
 			RecordKey++;
 		}
+	
 	}
 }
 
@@ -94,7 +95,7 @@ void ofApp::draw()
 			ofDrawCircle(attractPointsWithMovement[i], 4);
 		}
 	}
-	if (!recordbaby)
+	if (!recordbaby || cancel == true)
 	{
 
 		ofSetColor(230);
@@ -187,12 +188,16 @@ void ofApp::keyPressed(int key)
 	}
 	if (key == 'r' || key == 'R')
 	{
+		cancel = false;
 		currentModeStr = "We are Recording babyyyyyyyyyyyyyyyyy";
-		recordbaby = !recordbaby;
+		recordbaby = true;
 	}
 
 	if (key == 'p' || key == 'P')
 	{
+		resetParticles();
+		cancel = false;
+		recordbaby = false;
 		currentModeStr = "Replaying babyyyyyyyyyyyyyyyyyyy";
 		replaybaby = true;
 	}
@@ -204,8 +209,9 @@ void ofApp::keyPressed(int key)
 
 	if (key == 'c' || key == 'C')
 	{
-		replaybaby = !replaybaby;
-
+		replaybaby = false;
+		cancel = true;
+		currentModeStr = "Canceled";
 		resetParticles();
 	}
 }

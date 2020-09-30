@@ -27,9 +27,9 @@ public:
 	particleMode currentMode;
 	string currentModeStr;
 
-	bool updating, replaybaby, recordbaby;
+	bool updating, replaybaby, recordbaby, cancel;
 	int count = 0;
-	int RecordKey = 0;
+	int RecordKey = 1;
 	vector<char> record;
 	vector<Particle> p;
 	vector<glm::vec3> attractPoints;
