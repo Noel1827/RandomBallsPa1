@@ -88,9 +88,13 @@ void ofApp::keyPressed(int key)
 	{
 		currentMode = PARTICLE_MODE_ATTRACT;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		currentModeStr = "1 - PARTICLE_MODE_ATTRACT: attracts to mouse"; 
 		
 				
+=======
+		currentModeStr = "1 - PARTICLE_MODE_ATTRACT: attracts to mouse";
+>>>>>>> origin/Halves-sizes-of-particles
 =======
 		currentModeStr = "1 - PARTICLE_MODE_ATTRACT: attracts to mouse";
 >>>>>>> origin/Halves-sizes-of-particles
