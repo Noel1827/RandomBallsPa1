@@ -14,7 +14,6 @@ public:
 
 	void keyPressed(int key);
 	void keyReleased(int key);
-	void Donottouch(int key);
 	void mouseMoved(int x, int y);
 	void mouseDragged(int x, int y, int button);
 	void mousePressed(int x, int y, int button);
@@ -28,10 +27,7 @@ public:
 	particleMode currentMode;
 	string currentModeStr;
 
-	bool updating, replaybaby, recordbaby;
-	int count = 0;
-	int RecordKey = 0;
-	vector<char> record;
+	bool updating;
 	vector<Particle> p;
 	vector<glm::vec3> attractPoints;
 	vector<glm::vec3> attractPointsWithMovement;
