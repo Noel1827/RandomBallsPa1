@@ -149,11 +149,13 @@ void ofApp::keyPressed(int key)
 
 	if (key == 'a' || key == 'A')
 	{
+		// toggles the particles with a boolean
 		updating = !updating;
 	}
 
 	if (key == 'd' || key == 'D')
 	{
+		// changes all the particle's size with a for loop, make them bigger.
 		currentModeStr = "Double size Particles";
 		for (unsigned int i = 0; i < p.size(); i++)
 		{
@@ -162,6 +164,7 @@ void ofApp::keyPressed(int key)
 	}
 	if (key == 'm' || key == 'M')
 	{
+		// changes all the particle's size with a for loop, make them smaller.
 		currentModeStr = "Halve size of Particles";
 		for (unsigned int i = 0; i < p.size(); i++)
 		{
@@ -171,6 +174,7 @@ void ofApp::keyPressed(int key)
 
 	if (key == 't' || key == 'T')
 	{
+		// doubles the velocity of the particles
 		currentModeStr = "double the velocity";
 		for (unsigned int i = 0; i < p.size(); i++)
 		{
@@ -180,6 +184,7 @@ void ofApp::keyPressed(int key)
 
 	if (key == 's' || key == 'S')
 	{
+		// halves the velocity of the particles
 		currentModeStr = "Halve  the velocity";
 		for (unsigned int i = 0; i < p.size(); i++)
 		{
@@ -188,15 +193,22 @@ void ofApp::keyPressed(int key)
 	}
 	if (key == 'r' || key == 'R')
 	{
+		// sets of booleans that make recording of variables possible
 		cancel = false;
 		count = 0;
 		RecordKey = 1;
 		currentModeStr = "We are Recording babyyyyyyyyyyyyyyyyy";
 		recordbaby = true;
+		replaybaby = false;
+		if (recordbaby == true)
+		{
+			record.clear();
+		}
 	}
 
 	if (key == 'p' || key == 'P')
 	{
+		// sets of booleans that make playback  possible
 		resetParticles();
 		updating = true;
 		cancel = false;
@@ -207,11 +219,13 @@ void ofApp::keyPressed(int key)
 
 	if (recordbaby)
 	{
+		// pushes the variables from record
 		record.push_back(key);
 	}
 
 	if (key == 'c' || key == 'C')
 	{
+		// cancels the replay method
 		record.clear();
 		updating = true;
 		replaybaby = false;
