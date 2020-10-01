@@ -64,13 +64,13 @@ void ofApp::update()
 	if (replaybaby)
 	{
 		count++;
+
 		if (count == 100 && RecordKey < record.size())
 		{
 			count = 0;
 			keyPressed(record[RecordKey]);
 			RecordKey++;
 		}
-	
 	}
 }
 
@@ -189,6 +189,8 @@ void ofApp::keyPressed(int key)
 	if (key == 'r' || key == 'R')
 	{
 		cancel = false;
+		count = 0;
+		RecordKey = 1;
 		currentModeStr = "We are Recording babyyyyyyyyyyyyyyyyy";
 		recordbaby = true;
 	}
@@ -196,6 +198,7 @@ void ofApp::keyPressed(int key)
 	if (key == 'p' || key == 'P')
 	{
 		resetParticles();
+		updating = true;
 		cancel = false;
 		recordbaby = false;
 		currentModeStr = "Replaying babyyyyyyyyyyyyyyyyyyy";
@@ -209,6 +212,8 @@ void ofApp::keyPressed(int key)
 
 	if (key == 'c' || key == 'C')
 	{
+		record.clear();
+		updating = true;
 		replaybaby = false;
 		cancel = true;
 		currentModeStr = "Canceled";

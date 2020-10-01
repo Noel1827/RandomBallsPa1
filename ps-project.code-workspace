@@ -23,7 +23,15 @@
 			"vector": "cpp",
 			"limits": "cpp",
 			"sstream": "cpp",
-			"utility": "cpp"
+			"utility": "cpp",
+			"atomic": "cpp",
+			"deque": "cpp",
+			"forward_list": "cpp",
+			"list": "cpp",
+			"unordered_map": "cpp",
+			"unordered_set": "cpp",
+			"fstream": "cpp",
+			"system_error": "cpp"
 		}
 	}
 }
