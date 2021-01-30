@@ -39,7 +39,7 @@
             "name": "Windows",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/bin/pa1-pa1ng.exe",
+            "program": "${workspaceFolder}/bin/RandomBallsPa1.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
